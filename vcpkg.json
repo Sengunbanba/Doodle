@@ -32,7 +32,7 @@
     "boost-lambda2",
     {
       "name": "opencv",
-      "default-features":false,
+      "default-features": false,
       "features": [
         "ffmpeg",
         "contrib",
@@ -41,7 +41,7 @@
     },
     {
       "name": "imgui",
-      "default-features":false,
+      "default-features": false,
       "features": [
         "win32-binding",
         "dx11-binding",
@@ -56,7 +56,7 @@
     "entt",
     {
       "name": "sqlpp11",
-      "default-features":false,
+      "default-features": false,
       "features": [
         "sqlite3"
       ]

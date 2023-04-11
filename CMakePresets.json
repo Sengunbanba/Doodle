@@ -10,7 +10,6 @@
       "name": "Ninja_build",
       "displayName": "Ninja build",
       "description": "Ninja build using vcpkg",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/$env{doodle_install_prefix}",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
@@ -19,13 +18,10 @@
         "strategy": "external"
       },
       "toolset": {
-        "value": "v142,host=x64,version=14.29.30133",
+        "value": "v142,host=x64,version=14",
         "strategy": "external"
       },
       "cacheVariables": {
-        "CMAKE_SYSTEM_VERSION": "10.0.22000.0",
-        "CMAKE_C_COMPILER": "cl",
-        "CMAKE_CXX_COMPILER": "cl"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -35,7 +31,6 @@
           "disableExternalAnalysis": true
         }
       },
-      "cmakeExecutable": "C:/Program Files/CMake/bin/cmake.exe",
       "hidden": true
     },
     {
