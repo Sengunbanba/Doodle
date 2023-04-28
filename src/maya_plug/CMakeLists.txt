@@ -1,4 +1,4 @@
-set(maya_plug_name doodle_maya)
+#set(maya_plug_name doodle_maya)
 configure_file(DoodleExe.manifest.in doodle_maya.manifest)
 configure_file(maya_plug.rc.in doodle_maya.rc)
 
@@ -7,7 +7,7 @@ add_library(doodle_maya MODULE
         doodle_maya.rc
         ${PROJECT_SOURCE_DIR}/src/icon.ico
         )
-
+message("00000000000000" ${source_dir})
 add_subdirectory(configure configure_${Maya_Version})
 add_subdirectory(data data_${Maya_Version})
 add_subdirectory(exception exception_${Maya_Version})
@@ -18,10 +18,23 @@ add_subdirectory(main main_${Maya_Version})
 add_subdirectory(maya_comm maya_comm_${Maya_Version})
 add_subdirectory(maya_render maya_render_${Maya_Version})
 
+
 target_include_directories(doodle_maya PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+message("==============================")
+message(${CMAKE_CURRENT_BINARY_DIR})  #  D:/DEV/Doodle/build/Ninja_RelWithDebInfo/src/maya_plug2018
+message("==============================")
+
+message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+message(${CMAKE_BINARY_DIR})  #  D:/DEV/Doodle/build/Ninja_RelWithDebInfo
+message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+message(${CMAKE_SOURCE_DIR}) # D:/DEV/Doodle    out-of-source
+
 set_target_properties(doodle_maya PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/plug/maya/plug-ins
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/plug/maya/plug-ins
+        RUNTIME_OUTPUT_DIRECTORY 
+        ${CMAKE_BINARY_DIR}/plug/maya/plug-ins
+
+        LIBRARY_OUTPUT_DIRECTORY 
+        ${CMAKE_BINARY_DIR}/plug/maya/plug-ins
         )
 target_link_libraries(doodle_maya
         PRIVATE
@@ -35,6 +48,14 @@ target_link_libraries(doodle_maya
         OpenMP::OpenMP_CXX
         )
 
+set_target_properties(doodle_maya PROPERTIES DUO_hw 234555)
+
+get_target_property(VAR_hw  doodle_maya SOURCES )
+ 
+
+# message(STATUS "<<<<<<<<<<<<<<<<<<<<<<<<<<<<" ${VAR_hw}) 
+
+
 # 设置maya插件后缀名
 set_target_properties(
         doodle_maya PROPERTIES SUFFIX "_${Maya_Version}.mll"
@@ -44,12 +65,19 @@ configure_file(doodle.mod.in ${PROJECT_BINARY_DIR}/plug/maya/doodle.mod)
 
 list(APPEND maya_script_files ${CMAKE_CURRENT_LIST_DIR}/../doodle_core/resource/maya_fun_tool.py)
 
-# message("${maya_script_files}")
+# message("${maya_script_files}") # D:/DEV/Doodle/src/maya_plug/../doodle_core/resource/maya_fun_tool.py
+
+message("ZZZZZZZZZZZZZZZZZZZZZZ" ${PROJECT_SOURCE_DIR})#  D:/DEV/Doodle
+message("ZZZZZZZZZZZZZZZZZZZZZZ" ${PROJECT_BINARY_DIR})#  D:/DEV/Doodle/build/Ninja_RelWithDebInfo
+
+message("ccccccccccccccccccccccc" ${CMAKE_COMMAND}) #C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe
+
+message("LLLLLLLLLLLLLLLLLLLLLL" ${CMAKE_CURRENT_LIST_DIR})  #D:/DEV/Doodle/src/maya_plug
 add_custom_target(
         doodle_maya_python_files
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/script/maya ${PROJECT_BINARY_DIR}/plug/maya
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/../doodle_core/resource/maya_fun_tool.py ${PROJECT_BINARY_DIR}/plug/maya/scripts/scripts/
-)
+) 
 
 add_dependencies(doodle_maya doodle_maya_python_files)
 

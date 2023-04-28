@@ -42,7 +42,7 @@ doodle_lib::doodle_lib() : ptr() {
 
 doodle_lib& doodle_lib::Get() { return *impl::self; }
 void doodle_lib::init() {
-  ptr              = std::move(std::make_unique<impl>());
+  ptr              = std::move(std::make_unique<impl>()); // std::unique_ptr<T>(new T(std::forward<Ts>(params)...));
   /// @brief 初始化其他
   ptr->io_context_ = std::make_shared<boost::asio::io_context>();
   ptr->p_log       = std::make_shared<logger_ctr_ptr::element_type>();
